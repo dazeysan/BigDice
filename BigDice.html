@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Big Dice</title>
+
+  <script>
+    
+    /* script */
+    DieSize=20;
+    smallSize = 30;
+    fullSize = 50;
+    duration = 250;
+    interval = 20;
+
+    </script>
+  
+</head>
+<body>
+
+<button type="button" onClick="Javascript:DieSize=12;">12</button>
+<button type="button" onClick="Javascript:DieSize=20;">20</button>
+<br/>
+<br/>
+
+<div id="DieResult" style="font-size: 50vw; text-align: center;" onClick="Javascript:RollDie();">0</div>
+
+<br/>
+<br/>
+
+<script>
+ 
+
+  function RollDie() {
+    resultDiv = document.getElementById("DieResult");
+    var DieRoll=Math.floor(Math.random()*DieSize)+1;
+    resultDiv.innerHTML=DieRoll;
+    
+  }
+  
+  //Based on code from https://javascript.info/js-animation
+  function Animate() {
+    resultDiv = document.getElementById("DieResult");
+
+    let start = Date.now(); // remember start time
+
+    let timer = setInterval(function() {
+      // how much time passed from the start?
+      let timePassed = Date.now() - start;
+
+      if (timePassed >= duration) {
+        clearInterval(timer); // finish the animation after 2 seconds
+        return;
+      }
+
+      // draw the animation at the moment timePassed
+      draw(timePassed);
+
+    }, interval);
+
+  }
+  function draw(timePassed) {
+    size = ((timePassed/duration)*(fullSize-smallSize))+smallSize;
+    resultDiv.style.fontSize = size + 'vw';
+  }
+
+  
+</script>
+ 
+</body>
+</html>
